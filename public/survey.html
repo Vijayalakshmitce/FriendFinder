@@ -29,12 +29,17 @@
                 box-sizing: border-box;
                 position: relative;
                width:100%;
-               color: white;
+               color: aqua;
                 
             }
+            
+            #exampleModalCentered{
+                color :black;
+            }
+
             #matchPhoto{
                 width:200px;
-                height:250px;
+                height:200px;
             }
         
             </style>
@@ -128,37 +133,109 @@
             <option value="4">4</option>
             <option value="5">5(strongly agree)</option>
         </select>
-
+        <br>
+        <br>
+        <br>
+        <!---q6-->
+        <h5 class="font-weight-bold">Question 6</h5>
+        <p>It is often difficult for you to relate to other people’s feelings.</p>
+        <select class="selectpicker" data-live-search="true"  id ="question6">
+            <option value="default" selected="selected">Select your option</option>
+            <option value="1">1(strongly disagree)</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5(strongly agree)</option>
+        </select>
+        <br>
+        <br>
+        <br>
+        <!---q7-->
+        <h5 class="font-weight-bold">Question 7</h5>
+        <p>In a discussion, truth should be more important than people’s sensitivities.</p>
+        <select class="selectpicker" data-live-search="true"  id ="question7">
+            <option value="default" selected="selected">Select your option</option>
+            <option value="1">1(strongly disagree)</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5(strongly agree)</option>
+        </select>
+        <br>
+        <br>
+        <br>
+        <!---q8-->
+        <h5 class="font-weight-bold">Question 8</h5>
+        <p>You rarely get carried away by fantasies and ideas.</p>
+        <select class="selectpicker" data-live-search="true"  id ="question8">
+            <option value="default" selected="selected">Select your option</option>
+            <option value="1">1(strongly disagree)</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5(strongly agree)</option>
+        </select>
+        <br>
+        <br>
+        <br>
+        <!---q9-->
+        <h5 class="font-weight-bold">Question 9</h5>
+        <p>You think that everyone’s views should be respected regardless of whether they are supported by facts or not.</p>
+        <select class="selectpicker" data-live-search="true"  id ="question9">
+            <option value="default" selected="selected">Select your option</option>
+            <option value="1">1(strongly disagree)</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5(strongly agree)</option>
+        </select>
+        <br>
+        <br>
+        <br>
+         <!---q10-->
+         <h5 class="font-weight-bold">Question 10</h5>
+         <p>You feel more energetic after spending time with a group of people.</p>
+         <select class="selectpicker" data-live-search="true"  id ="question10">
+             <option value="default" selected="selected">Select your option</option>
+             <option value="1">1(strongly disagree)</option>
+             <option value="2">2</option>
+             <option value="3">3</option>
+             <option value="4">4</option>
+             <option value="5">5(strongly agree)</option>
+         </select>
+         <br>
+         <br>
+         
         <div class="text-center">
                 <button class="btn btn-lg btn-primary" id = "Submit" data-toggle="modal" data-target="#exampleModalCentered"><span class="fa fa-check-circle"></span> Submit </button></a>
                 
               </div>
-             
+              <footer class="footer">
+                    <div class="container">
+                      <p><a href="/api/friends">API Friend List</a> | <a href="/where">Git repo</a>
+                    </div>
+                  </footer>
               <!-- Modal -->
 <div class="modal" id="exampleModalCentered" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalCenteredLabel">Model Title</h5>
+              <h5 class="modal-title" id="exampleModalCenteredLabel">Best Match</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-             <div id ="matchName">
-             </div>
-           
-             <img id ="matchPhoto">
-            </img>
+            <div id="matchName"></div>
+            <br>
+            <img id="matchPhoto">
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              
             </div>
           </div>
         </div>
       </div>
-
     </div>
 
     <script type="text/javascript">
@@ -172,7 +249,7 @@
                {
                 name: $("#name").val(),
                 photo: $("#photo").val(),
-                scores:[$("#question1").val(),$("#question2").val(),$("#question3").val(),$("#question4").val(),$("#question5").val()]
+                scores:[$("#question1").val(),$("#question2").val(),$("#question3").val(),$("#question4").val(),$("#question5").val(),$("#question6").val(),$("#question7").val(),$("#question8").val(),$("#question9").val(),$("#question10").val()]
                 };
               console.log( newFriendList);
              
@@ -180,7 +257,7 @@
             
                 if(data){
                     console.log("Added successfully");
-              
+                    $("#matchPhoto").show();
                 $("#matchName").text(data.name);
                 $("#matchPhoto").attr("src",data.photo);
                 console.log(data.name);
@@ -202,6 +279,7 @@
         }
         else{
             $("#matchName").text("Please fill required field");
+            $("#matchPhoto").hide();
         }
             
         });

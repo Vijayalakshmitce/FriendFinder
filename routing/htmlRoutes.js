@@ -15,6 +15,11 @@ module.exports  = function(app){
         res.sendFile(path.join(__dirname,"../public/heart2.jpg"));
  
      })
+     app.get("/where", (req, res) => {
+
+        res.status(301).redirect("https://github.com/Vijayalakshmitce/FriendFinder.git")
+    
+    })
 
     
 
