@@ -23,6 +23,23 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+    <style>
+            body{
+                background-image: url("/image2");
+                box-sizing: border-box;
+                position: relative;
+               width:100%;
+               color: white;
+                
+            }
+            #matchPhoto{
+                width:200px;
+                height:250px;
+            }
+        
+            </style>
+
+
 
 </head>
 
@@ -44,8 +61,8 @@
         </form>
 
         <!---q1-->
-        <h3 class="font-weight-bold">Question 1</h3>
-        <h5>Your mind is always buzzing with unexplored ideas and plans.</h5>
+        <h5 class="font-weight-bold">Question 1</h5>
+        <p>Your mind is always buzzing with unexplored ideas and plans.</p>
         <select class="selectpicker" data-live-search="true" id="question1">
             <option value="default" selected="selected">Select your option</option>
             <option value="1">1(strongly disagree)</option>
@@ -58,8 +75,8 @@
         <br>
         <br>
         <!---q2-->
-        <h3 class="font-weight-bold">Question 2</h3>
-        <h5>Generally speaking, you rely more on your experience than your imagination.</h5>
+        <h5 class="font-weight-bold">Question 2</h5>
+        <p>Generally speaking, you rely more on your experience than your imagination.</p>
         <select class="selectpicker" data-live-search="true" id ="question2">
             <option value="default" selected="selected">Select your option</option>
             <option value="1">1(strongly disagree)</option>
@@ -72,8 +89,8 @@
         <br>
         <br>
         <!---q3-->
-        <h3 class="font-weight-bold">Question 3</h3>
-        <h5>You find it easy to stay relaxed and focused even when there is some pressure.</h5>
+        <h5 class="font-weight-bold">Question 3</h5>
+        <p>You find it easy to stay relaxed and focused even when there is some pressure.</p>
         <select class="selectpicker" data-live-search="true" id ="question3">
             <option value="default" selected="selected">Select your option</option>
             <option value="1">1(strongly disagree)</option>
@@ -86,8 +103,8 @@
         <br>
         <br>
         <!---q4-->
-        <h3 class="font-weight-bold">Question 4</h3>
-        <h5>You rarely do something just out of sheer curiosity.</h5>
+        <h5 class="font-weight-bold">Question 4</h5>
+        <p>You rarely do something just out of sheer curiosity.</p>
         <select class="selectpicker" data-live-search="true" id ="question4">
             <option value="default" selected="selected">Select your option</option>
             <option value="1">1(strongly disagree)</option>
@@ -101,8 +118,8 @@
         <br>
 
         <!---q5-->
-        <h3 class="font-weight-bold">Question 5</h3>
-        <h5>People can rarely upset you.</h5>
+        <h5 class="font-weight-bold">Question 5</h5>
+        <p>People can rarely upset you.</p>
         <select class="selectpicker" data-live-search="true"  id ="question5">
             <option value="default" selected="selected">Select your option</option>
             <option value="1">1(strongly disagree)</option>
@@ -122,7 +139,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalCenteredLabel">Modal title</h5>
+              <h5 class="modal-title" id="exampleModalCenteredLabel">Model Title</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -130,9 +147,9 @@
             <div class="modal-body">
              <div id ="matchName">
              </div>
-             <div id ="matchPhoto">
-
-             </div>
+           
+             <img id ="matchPhoto">
+            </img>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -147,7 +164,10 @@
     <script type="text/javascript">
         $("#Submit").on("click", function(){
             console.log($("#name").val())  
-            console.log($("#question1").val());         
+            console.log($("#question1").val());  
+            
+            if( ($('#name').val().trim() !== "") && ($('#photo').val().trim() !== "") ) {
+                   
             var newFriendList = 
                {
                 name: $("#name").val(),
@@ -155,19 +175,20 @@
                 scores:[$("#question1").val(),$("#question2").val(),$("#question3").val(),$("#question4").val(),$("#question5").val()]
                 };
               console.log( newFriendList);
+             
             $.post("/api/friends",newFriendList ,function(data){
             
                 if(data){
                     console.log("Added successfully");
               
                 $("#matchName").text(data.name);
-                $("#matchPhoto").text(data.photo);
-    
+                $("#matchPhoto").attr("src",data.photo);
+                console.log(data.name);
                 }
                 else{
                     console.log("sorry friendlist is not added ")
                 }
-                
+            
             // // clear data
              $("#name").val("");
             $("#photo").val("");
@@ -177,7 +198,12 @@
             $("#question4").val('default').selectpicker("refresh");
             $("#question5").val('default').selectpicker("refresh");
             });
-        
+            
+        }
+        else{
+            $("#matchName").text("Please fill required field");
+        }
+            
         });
         
     </script>
