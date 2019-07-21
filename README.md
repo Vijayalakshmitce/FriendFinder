@@ -22,3 +22,10 @@ Clone or fork and run using server.js in the command line.
 Use localhost:8082
 
 Home page:
+![friendfin12](https://user-images.githubusercontent.com/49068436/61594413-83337d80-abb9-11e9-9d19-0e8d2bed326e.JPG)
+
+
+Acknowledgments
+Thanks to Chriss Ross for the idea of using a modal for the alert to enter the required fields.
+
+Best Match (used BootStrap Modal):
